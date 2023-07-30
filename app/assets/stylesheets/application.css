@@ -118,10 +118,15 @@
    background-color: #d9f0f5;
  }
  
- input {
+ input, textarea {
    margin-top: 1.5em;
    font-family: 'Roboto', sans-serif;
-   padding: 0.5em;
+   padding: 0.8em;
+   margin-left: .2em;
+   border: none;
+   outline: none;
+   background-color: #eee;
+   border-radius: 10px;
  }
  
  input[type='checkbox'] {
@@ -147,8 +152,6 @@
  }
  
  textarea {
-   margin-top: 1.5em;
-   font-family: Roboto;
    width: 200px;
    height: 80px;
  }
