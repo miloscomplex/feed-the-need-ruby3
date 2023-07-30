@@ -1,0 +1,42 @@
+<h1>Needy Items Edit</h1>
+
+<h2>Hi <%= @needy.name %> edit your list below.</h2>
+
+<% if @item.errors.any? %>
+  <ul>
+    <% @item.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with url: needy_items_path, method: "patch", local: true do |form| %>
+  <%# needy_id_field(@item) %>
+  <input type="hidden" name="item[needy_id]" value="<%= @needy.id %>">
+  <% @items.each do |item| %>
+    <li>
+    <%= fields_for "items[]", item do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <br>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+      <br>
+    <% end %>
+    </li>
+  <% end %>
+  <li>
+    <p>Add an additional item</p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <br>
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity %>
+    <br>
+  </li>
+  <%= form.submit %>
+<% end %>
+
+<br>
+<%= link_to "Back to your profile", needy_path(@needy) %><br>
+<%= link_to "Delete Your List", needy_items_path, method: "delete", data: { confirm: "Are you sure you want to delete your list?" }, class: "plain" %>

@@ -1,0 +1,42 @@
+<h1>Hello There, <%= @donator.name %></h1>
+<h2>This is your personal homepage</h2>
+<span><strong>Your registered email is:</strong> <%= @donator.email %></span>
+<p class="about"><strong>About You:</strong> <%= @donator.about %></p>
+
+  <p><%= link_to "Edit your profile", edit_donator_path %></p>
+
+<div class="activity">
+<h3>Your Recent activity</h3>
+  <% if @activity.empty? %>
+    <p>You have no recent activity to display</p>
+  <% else %>
+    <p>You have made <%= pluralize(@donation_count, 'donation') %></p>
+    <% @activity.each do |item| %>
+      <li>
+        Name: <%= item.name %><br>
+        Quantity: <%= item.quantity %><br>
+        Donated To: <%= item.needy.name %>
+      </li>
+    <% end %>
+  <% end %>
+</div>
+
+<h2>People In Need</h2>
+<% if @needies.empty? %>
+    <div class="list">
+      <p>There is no one currently in needy</p>
+    </div>
+  <% else %>
+    <% @needies.each do |needy| %>
+      <div class="needy_list">
+        <h4>Name: <%= needy.name %></h4>
+        <p class="about">
+        <strong><%= needy.first_name %>'s Bio:</strong><br>
+        <%= needy.bio %>
+        </p>
+        <%= link_to "See Profile", donator_needy_path(@donator.id, needy.id) %>
+      </div>
+    <% end %>
+  <% end %>
+
+<p><%= link_to "Delete Your Profile", donator_path, method: "delete", data: { confirm: "Are you sure you want to delete your Profile?" }, class: "plain" %></p>

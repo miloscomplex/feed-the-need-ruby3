@@ -1,0 +1,29 @@
+<h1>New Donator</h1>
+<% if @donator.errors.any? %>
+  <ul>
+    <% @donator.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @donator, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <br>
+  <%= form.label :about %>
+  <%= form.text_area :about %>
+  <br>
+  <%= form.label :password %>
+  <%= form.text_field :password %>
+  <br>
+  <%= form.label :password_confirmation %>
+  <%= form.text_field :password_confirmation %>
+  <br>
+  <%= form.submit %>
+<% end %>
+<p>Or</p>
+<%= link_to "Sign-in with Google", "/auth/google_oauth2" %>

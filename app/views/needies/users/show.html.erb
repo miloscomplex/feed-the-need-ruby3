@@ -1,0 +1,43 @@
+<h1>Hi <%= @needy.name %>!</h1>
+
+<h2>This is your personal home page</h2>
+
+<span><strong>Your Email:</strong> <%= @needy.email %></span>
+
+<p class="bio"><strong>Your Bio:</strong> <%= @needy.bio %></p>
+
+<%= link_to "Edit your profile", edit_needy_path(@needy) %><br>
+
+<h2>Your List Of Needs</h2>
+  <ul>
+    <% @needy.not_donated.each do |item| %>
+      <li>
+        Name: <%= item.name %><br>
+        Quantity: <%= item.quantity %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if @needy.items.empty? %>
+    <%= link_to "Create Your List of Needs", new_needy_items_path(@needy) %>
+  <% else %>
+    <%= link_to "Edit Your List of Needs", edit_needy_items_path(@needy) %>
+  <% end %>
+
+<div class="activity">
+  <h2>Recently donated items</h2>
+    <ul>
+      <% if @donated_items.present? %>
+        <% @donated_items.each do |item| %>
+          <li>
+            Item: <%= item.name %><br>
+            Quantity: <%= item.quantity %><br>
+            Donated By: <%= item.find_donator.name %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>No Items have been donated</li>
+      <% end %>
+    </ul>
+</div>
+<p><%= link_to "Delete Your Profile", needy_path, method: "delete", data: { confirm: "Are you sure you want to delete your profile?" }, class: "plain" %></p>

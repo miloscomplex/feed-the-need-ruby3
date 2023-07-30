@@ -1,0 +1,24 @@
+<h1>New Needy</h1>
+<% if @needy.errors.any? %>
+  <ul>
+    <% @needy.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @needy, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <br>
+  <%= form.label :bio %>
+  <%= form.text_area :bio %>
+  <br>
+  <%= form.label :password %>
+  <%= form.text_field :password %>
+  <br>
+  <%= form.submit %>
+<% end %>

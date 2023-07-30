@@ -1,0 +1,23 @@
+<h1>This is <%= @needy.first_name %>'s Profile</h1>
+<h2>Bio</h2>
+<p class="about"><%= @needy.bio %></p>
+<h3>This person is in need of:</h3>
+<ul>
+  <% if @items.empty? %>
+    <li>Nothing at this time</li>
+  <% else %>
+    <%= form_with url: donator_donate_items_path do |form| %>
+        <% @items.each_with_index do |item, index| %>
+          <li>
+            <%= fields_for "items[]", item do |f| %>
+              <%= f.check_box :id %>
+              <%= f.label item["name"] %> - quantity: <%= f.label item["quantity"] %>
+            <% end %>
+          </li>
+        <% end %>
+      <p class="callout">Note: You are only able to donate a <strong>total</strong> of 8 items per Month. You have made <strong><%= pluralize(@donation_count, 'donation') %></strong>.</p>
+      <%= form.submit "Donate Items" %>
+    <% end %>
+  <% end %>
+</ul>
+<%= link_to "Back to Your Profile", donator_path(@donator), class: "plain" %>

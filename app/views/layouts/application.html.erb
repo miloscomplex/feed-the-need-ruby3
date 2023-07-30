@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FeedTheNeed</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+        <nav>
+          <% if logged_in? %>
+            <% if is_donator? %>
+              <%= link_to "Home", donator_path(@current_user) %> |
+            <% end %>
+            <% if is_needy? %>
+              <%= link_to "Home", needy_path(@current_user) %> |
+            <% end %>
+            <a href="/logout">LogOut</a>
+          <% else %>
+            <%= link_to "Log In", login_path %>
+             |
+            <%= link_to "Sign Up", root_path %>
+          <% end %>
+        </nav>
+
+        <div id="content">
+          <% flash.each do |name, message| %>
+            <div class=<%= name %>>
+              <%= message %>
+            </div>
+          <% end %>
+
+          <%= yield %>
+
+          <div class="footer">
+            <p>Feed The Need</p>
+          </div>
+        </div>
+  </body>
+</html>

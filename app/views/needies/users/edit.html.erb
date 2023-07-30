@@ -1,0 +1,15 @@
+<h1>Needy User Edit</h1>
+
+<%= form_with model: @needy, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <br>
+  <%= form.label :bio %>
+  <%= form.text_area :bio %>
+  <br>
+  <%= form.submit "Update Your Profile" %>
+<% end %>
+<%= link_to "Back to Profile", needy_path(@needy), class: "plain" %>

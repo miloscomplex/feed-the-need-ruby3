@@ -1,0 +1,26 @@
+<h1>Needy New Items</h1>
+<% if @item.errors.any? %>
+  <ul>
+    <% @item.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<p>Start off your list with 3 items. You can add additional items in the edit your list link after it's creation. Pleae keep items within reason and 3 items are required</p>
+<%= form_with url: needy_items_path, local: true do |form| %>
+  <input type="hidden" name="item[needy_id]" value="<%= @needy.id %>">
+    <%= form.fields_for :items do |f| %>
+        <% 3.times do |i| %>
+        <%= form.label :item_name %>
+        <%= form.text_field "name_#{i}" %>
+        <br>
+        <%= form.label :quantity %>
+        <%= form.text_field "quantity_#{i}" %>
+        <br>
+        <br>
+      <% end %>
+    <% end %>
+    <br>
+  <%= form.submit "Create List" %>
+<% end %>

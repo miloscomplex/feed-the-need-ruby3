@@ -1,0 +1,15 @@
+<h1>Donators Edit</h1>
+
+<%= form_with model: @donator, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <br>
+  <%= form.label :about %>
+  <%= form.text_area :about %>
+  <br>
+    <%= form.submit "Update Your Profile" %>
+<% end %>
+<%= link_to "Back to Your Profile", donator_path(@donator), class: "plain" %>
